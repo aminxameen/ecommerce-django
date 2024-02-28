@@ -1,0 +1,49 @@
+{% extends 'frontend/layout/main.html' %}
+
+{% block content %}
+<div class="container my-4">
+
+    {% if user.is_authenticated %}
+    <p>Hey, {{ user.username }}!</p>
+    <h2>Your Shopping wishlist</h2>
+    {% if wishlists %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Product_Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in wishlists %}
+            <tr>
+                <td><img src="{{item.product.image.url}}" alt="{{item.product.image.url}}" loading="lazy" width="80" height="80">
+                </td>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>NPR {{ item.product.price }}</td>
+                <td>
+                    <a href="/remove-from-wishlist/{{item.id}}" class="btn btn-danger btn-sm">Remove</a>
+                    <br>
+                    
+            
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+    {% else %}
+    <p>Your wishlist is empty.<br> Go shop More.</p>
+    {% endif %}
+
+    {% else %}
+    <p class="text-center my-5">You are not logged in.</p>
+    {% endif %}
+</div>
+{% endblock %}
