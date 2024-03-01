@@ -1,0 +1,43 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+    <h1>Product Details</h1>
+    <button onclick="getProductDetails()">Get Product Details</button>
+    <div id="productDetails"></div>
+
+    <script>
+        function getProductDetails() {
+            fetch('http://localhost:8000/api/get-product/')
+                .then(response => response.json())
+                .then(data => {
+                    displayProductDetails(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching product details:', error);
+                });
+        }
+
+        function displayProductDetails(products) {
+            const productDetailsDiv = document.getElementById('productDetails');
+            productDetailsDiv.innerHTML = ''; // Clear previous content
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${product.name}</p>
+                    <p><strong>Price:</strong> ${product.price}</p>
+                    <hr>
+                `;
+                productDetailsDiv.appendChild(productDiv);
+            });
+        }
+    </script>
+</body>
+</html>
