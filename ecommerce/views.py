@@ -201,3 +201,7 @@ def removeFromWishList(request,wishlist_id):
     wishlist_item = Wishlist.objects.get(pk=wishlist_id)
     wishlist_item.delete()
     return redirect('/wishlist/')
+
+def getProducts(request):
+    products = Product.objects.all
+    

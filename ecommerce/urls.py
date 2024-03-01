@@ -21,4 +21,10 @@ urlpatterns = [
     
     path('checkout/',checkout),
     path('order/', orderedItems),
+    
+# api urllls
+    
+    path('get-products',getProducts)
+    
+    
 ]
